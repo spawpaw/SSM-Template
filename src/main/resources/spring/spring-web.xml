@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <!-- 配置SpringMVC -->
+    <!-- 1:开启SpringMVC的注解模式 -->
+    <!-- 简化配置:
+    	(1)自动注解DefaultAnnotationHandlerMapping ,AnnotationMethodHandlerAdapter
+    	(2)提供一系列:数据绑定,数字和日期的format，@NumberFormat，@DataTimeFormat，
+    	xml，json的支持 -->
+    <mvc:annotation-driven/>
+
+    <!-- 2.静态资源默认servlet配置
+        (1)加入对静态资源的处理:gif,js,png
+        (2)允许使用"/"做整体映射-->
+    <mvc:default-servlet-handler/>
+    <!-- 3.配置jsp 显示ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- 4:扫描web相关的配置 -->
+    <context:component-scan base-package="com.spawpaw.ssmtemplate.controller;com.spawpaw.ssmtemplate.controller_restful;com.spawpaw.ssmtemplate.common.config"/>
+
+    <!-- session timeout interceptor ,设置进入特定网页需要满足的session条件，在SessionTimeout拦截器中实现 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*"/>
+            <bean class="com.spawpaw.ssmtemplate.common.interceptor.SessionTimeoutInterceptor">
+                <property name="allowUrls">
+                    <list>
+                        <value>/lab</value>
+                        <value>/lab/</value>
+                        <value>/lab/index</value>
+                        <value>/lab/resvsys/login</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- exception handler 指定异常的跳转页面 -->
+    <bean id="handlerExceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="com.spawpaw.ssmtemplate.common.exception.SessionTimeoutException">/lab</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
