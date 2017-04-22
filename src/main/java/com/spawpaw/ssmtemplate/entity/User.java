@@ -3,11 +3,7 @@ package com.spawpaw.ssmtemplate.entity;
 /**
  * @author BenBenShang 2017/4/21.
  * @version: 1.0 2017.2.21
- * @copyright: <p> 2017.2.21 spawpaw@hotmail.com CC-BY-NC-SA.<br/>
- * This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</br>
- * view details: https://creativecommons.org/licenses/by-nc-sa/4.0/
- * </p>
- * <p>
+ * @copyright:  2017.2.21 spawpaw@hotmail.com CC-BY-NC-SA.
  * Description for this class:
  * <p>$desc
  */

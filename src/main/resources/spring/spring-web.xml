@@ -25,6 +25,7 @@
     <!-- 3.配置jsp 显示ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="contentType" value="text/html;charset=UTF-8" />
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
@@ -53,7 +54,7 @@
           class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
-                <prop key="com.spawpaw.ssmtemplate.common.exception.SessionTimeoutException">/lab</prop>
+                <prop key="com.spawpaw.ssmtemplate.common.exception.SessionTimeoutException">/</prop>
             </props>
         </property>
     </bean>
