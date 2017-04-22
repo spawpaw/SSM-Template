@@ -32,21 +32,21 @@
     <context:component-scan base-package="com.spawpaw.ssmtemplate.controller;com.spawpaw.ssmtemplate.controller_restful;com.spawpaw.ssmtemplate.common.config"/>
 
     <!-- session timeout interceptor ,设置进入特定网页需要满足的session条件，在SessionTimeout拦截器中实现 -->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/*"/>
-            <bean class="com.spawpaw.ssmtemplate.common.interceptor.SessionTimeoutInterceptor">
-                <property name="allowUrls">
-                    <list>
-                        <value>/lab</value>
-                        <value>/lab/</value>
-                        <value>/lab/index</value>
-                        <value>/lab/resvsys/login</value>
-                    </list>
-                </property>
-            </bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/*"/>-->
+            <!--<bean class="com.spawpaw.ssmtemplate.common.interceptor.SessionTimeoutInterceptor">-->
+                <!--<property name="allowUrls">-->
+                    <!--<list>-->
+                        <!--<value>/lab</value>-->
+                        <!--<value>/lab/</value>-->
+                        <!--<value>/lab/index</value>-->
+                        <!--<value>/lab/resvsys/login</value>-->
+                    <!--</list>-->
+                <!--</property>-->
+            <!--</bean>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 
     <!-- exception handler 指定异常的跳转页面 -->
     <bean id="handlerExceptionResolver"
