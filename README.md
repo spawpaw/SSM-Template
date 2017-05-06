@@ -72,8 +72,10 @@ Linux: `/usr/java/jdk1.8.0_91`）
 点击`new project from version control > git`,输入``
 等待导入成功
 
-- IDEA关于Tomcat的配置
-
+- IDEA关于Maven的配置  
+    - 修改commandline 为 `clean tomcat7:deploy`
+- IDEA关于Tomcat的配置  
+    - 添加artificat `war-explode`
 
 
 
