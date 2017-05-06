@@ -1,13 +1,23 @@
+<%@ page import="com.spawpaw.ssmtemplate.common.config.Config" %>
 <%--
-  Created by IntelliJ IDEA.
-  User: 陈文航
-  Date: 2017/4/1 0001
-  Time: 13:49
-  To change this template use File | Settings | File Templates.
+  @author: 尚奔奔
+  @date: 2017/5/6 13:49
+  统一的css资源
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    if (Config.USE_CDN) {
+%>
+
+<%
+    }else {
+%>
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/public/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/public/css/style.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/public/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/public/css/bootstrap-table.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/public/css/bootstrap-editable.css">
+<%
+    }
+%>

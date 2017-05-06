@@ -34,7 +34,7 @@
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
 
@@ -51,6 +51,7 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
+
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -59,16 +60,16 @@
     <!--替换默认的401错误页面-->
     <error-page>
         <error-code>401</error-code>
-        <location>/WEB-INF/jsp/User/error.jsp</location>
+        <location>/WEB-INF/jsp/error/401.jsp</location>
     </error-page>
     <!--替换默认的403错误页面-->
     <error-page>
         <error-code>403</error-code>
-        <location>/WEB-INF/jsp/User/error.jsp</location>
+        <location>/WEB-INF/jsp/error/403.jsp</location>
     </error-page>
     <!--替换默认的404错误页面-->
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/jsp/User/error.jsp</location>
+        <location>/WEB-INF/jsp/error/404.jsp</location>
     </error-page>
 </web-app>

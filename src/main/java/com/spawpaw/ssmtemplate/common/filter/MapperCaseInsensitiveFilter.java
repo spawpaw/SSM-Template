@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  * 将视为相同的路径
  */
 @Configuration
-public class SpringControllerCaseInsensitiveFilter extends WebMvcConfigurationSupport {
+public class MapperCaseInsensitiveFilter extends WebMvcConfigurationSupport {
 
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {

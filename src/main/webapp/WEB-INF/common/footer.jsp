@@ -1,9 +1,6 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: 陈文航
-  Date: 2017/4/1 0001
-  Time: 13:55
-  To change this template use File | Settings | File Templates.
+  @author: 尚奔奔
+  @date: 2017/5/6 13:49
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- footer -->

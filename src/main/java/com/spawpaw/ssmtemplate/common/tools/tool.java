@@ -11,8 +11,7 @@ import javax.servlet.http.HttpSession;
  * Description for this class:
  *
  */
-public class sessionTool {
-
+public class tool {
     public static User getUser(HttpSession session) {
         return (User) session.getAttribute("user");
     }
