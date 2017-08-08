@@ -54,7 +54,7 @@
     <!--TODO 在这里定义你的 异常类 和 对应的异常代码-->
     <bean id="exResolver" class="com.spawpaw.ssm.common.controller.ControllerAdvice">
         <!--TODO 异常类所在的包名-->
-        <property name="packagePrefix" value="com.yourcompany.artifactId.exception"/>
+        <property name="packagePrefix" value="com.spawpaw.ssm.exception"/>
         <!--未知错误的代码-->
         <property name="unknownExceptionCode" value="-1"/>
         <property name="showErrorStackInMessage" value="false"/>
