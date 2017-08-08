@@ -17,7 +17,7 @@
     	(2)提供一系列:数据绑定,数字和日期的format，@NumberFormat，@DataTimeFormat，
     	xml，json的支持 -->
     <mvc:annotation-driven/>
-
+    <context:component-scan base-package="com.spawpaw.ssm"/>
     <!-- 2.静态资源默认servlet配置
         (1)加入对静态资源的处理:gif,js,png
         (2)允许使用"/"做整体映射-->
@@ -25,37 +25,113 @@
     <!-- 3.配置jsp 显示ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
     <!-- 4:扫描web相关的配置 -->
-    <context:component-scan base-package="com.spawpaw.ssmtemplate.controller;com.spawpaw.ssmtemplate.controller_restful;com.spawpaw.ssmtemplate.common.config"/>
+    <!--TODO service层的位置-->
+    <context:component-scan base-package="com.spawpaw.ssm.service"/>
 
     <!-- session timeout interceptor ,设置进入特定网页需要满足的session条件，在SessionTimeout拦截器中实现 -->
     <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/*"/>-->
-            <!--<bean class="com.spawpaw.ssmtemplate.common.interceptor.SessionTimeoutInterceptor">-->
-                <!--<property name="allowUrls">-->
-                    <!--<list>-->
-                        <!--<value>/lab</value>-->
-                        <!--<value>/lab/</value>-->
-                        <!--<value>/lab/index</value>-->
-                        <!--<value>/lab/resvsys/login</value>-->
-                    <!--</list>-->
-                <!--</property>-->
-            <!--</bean>-->
-        <!--</mvc:interceptor>-->
+    <!--<mvc:interceptor>-->
+    <!--<mvc:mapping path="/*"/>-->
+    <!--<bean class="PreInterceptor">-->
+    <!--<property name="allowUrls">-->
+    <!--<list>-->
+    <!--<value>/</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--</mvc:interceptor>-->
     <!--</mvc:interceptors>-->
 
-    <!-- exception handler 指定异常的跳转页面 -->
-    <bean id="handlerExceptionResolver"
-          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="exceptionMappings">
-            <props>
-                <prop key="com.spawpaw.ssmtemplate.common.exception.SessionTimeoutException">/</prop>
-            </props>
+
+    <!-- Controller增强
+          1.实现对Service层返回的结果自动封装
+          2.实现统一的异常处理-->
+    <!--TODO 在这里定义你的 异常类 和 对应的异常代码-->
+    <bean id="exResolver" class="com.spawpaw.ssm.common.controller.ControllerAdvice">
+        <!--TODO 异常类所在的包名-->
+        <property name="packagePrefix" value="com.yourcompany.artifactId.exception"/>
+        <!--未知错误的代码-->
+        <property name="unknownExceptionCode" value="-1"/>
+        <property name="showErrorStackInMessage" value="false"/>
+        <!--异常集合，如果包名不是上面设置的，就把包名写完全-->
+        <!--key是异常代码，value是异常类名-->
+        <!--请设置key为大于1024的数字（避免和HTTP状态码冲突）-->
+        <property name="errorMap">
+            <map>
+                <!--自定义根异常-->
+                <entry value="10086" key="ServiceException"/>
+
+                <!--登录相关的异常-->
+                <entry value="10101" key="NoSuchUserException"/>
+                <entry value="10102" key="WrongPasswordException"/>
+                <entry value="10103" key="SessionTimeoutException"/>
+                <entry value="10104" key="UserNotLoginException"/>
+
+                <!--权限相关异常 用户权限不足以访问请求的资源-->
+                <entry value="10401" key="PermissionDeniedException"/>
+
+
+                <!--Spring 异常体系中的异常-->
+                <!--
+                    DataAccessException
+                    |-RecoverableDataAccessException
+                    |-TransientDataAccessException
+                    | |-QueryTimeoutException
+                    | |-TransientDataAccessResourceException
+                    | |-ConcurrencyFailureException
+                    |   |-OptimisticLockingFailureException
+                    |   |-PessimisticLockingFailureException
+                    |     |-CannotAcquireLockException
+                    |     |-DeadlockLoserDataAccessException
+                    |     |-CannotSerializeTransactionException
+                    |-NonTransientDataAccessException
+                    | |-DataRetrievalFailureException
+                    | | |-IncorrectResultSizeDataAccessException
+                    | |   |-EmptyResultDataAccessException
+                    | |-DataIntegrityViolationException
+                    | | |-DuplicateKeyException
+                    | |-UncategorizedDataAccessException
+                    | |-InvalidDataAccessResourceUsageException
+                    | | |-TypeMismatchDataAccessException
+                    | | |-IncorrectUpdateSemanticsDataAccessException
+                    | |-InvalidDataAccessApiUsageException
+                    | |-CleanupFailureDataAccessException
+                    | |-PermissionDeniedDataAccessException
+                    | |-NonTransientDataAccessResourceException
+                -->
+                <!--可以在org.springframework:spring-tx依赖中的dao包中找到这些异常-->
+                <entry value="50100" key="org.springframework.dao.CannotAcquireLockException"/>
+                <entry value="50100" key="org.springframework.dao.CannotSerializeTransactionException"/>
+                <entry value="50100" key="org.springframework.dao.CleanupFailureDataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.ConcurrencyFailureException"/>
+                <entry value="50100" key="org.springframework.dao.DataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.DataAccessResourceFailureException"/>
+                <entry value="50100" key="org.springframework.dao.DataIntegrityViolationException"/>
+                <entry value="50100" key="org.springframework.dao.DataRetrievalFailureException"/>
+                <entry value="50100" key="org.springframework.dao.DeadlockLoserDataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.DuplicateKeyException"/>
+                <entry value="50100" key="org.springframework.dao.EmptyResultDataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.IncorrectResultSizeDataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.IncorrectUpdateSemanticsDataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.InvalidDataAccessApiUsageException"/>
+                <entry value="50100" key="org.springframework.dao.InvalidDataAccessResourceUsageException"/>
+                <entry value="50100" key="org.springframework.dao.NonTransientDataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.NonTransientDataAccessResourceException"/>
+                <entry value="50100" key="org.springframework.dao.OptimisticLockingFailureException"/>
+                <entry value="50100" key="org.springframework.dao.PermissionDeniedDataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.PessimisticLockingFailureException"/>
+                <entry value="50100" key="org.springframework.dao.QueryTimeoutException"/>
+                <entry value="50100" key="org.springframework.dao.RecoverableDataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.TransientDataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.TransientDataAccessResourceException"/>
+                <entry value="50100" key="org.springframework.dao.TypeMismatchDataAccessException"/>
+                <entry value="50100" key="org.springframework.dao.UncategorizedDataAccessException"/>
+            </map>
         </property>
     </bean>
 

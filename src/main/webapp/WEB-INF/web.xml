@@ -8,8 +8,16 @@
          metadata-complete="true">
     <!-- 修改servlet的版本为3.0 -->
 
+
+    <!--监听容器初始化的监听器-->
+    <listener>
+        <listener-class>com.spawpaw.ssm.common.listener.ContextLifeCircleListener</listener-class>
+    </listener>
+
+
     <!-- 默认springMVC的分发器 -->
     <servlet>
+        <!--TODO 这里填写你的servlet的名字-->
         <servlet-name>ssm-template-dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
@@ -19,6 +27,7 @@
     </servlet>
     <!--设置spring分发器需要处理的mapping-->
     <servlet-mapping>
+        <!--TODO 这里和上面填一样-->
         <servlet-name>ssm-template-dispatcher</servlet-name>
         <!--默认拦截所有请求-->
         <url-pattern>/*</url-pattern>
@@ -29,14 +38,15 @@
         <!-- configs about session tracking cookies created by this web application-->
         <cookie-config>
             <!--The default is JSESSIONID-->
-            <name>SSM_TEMPLATE_SESSION_ID</name>
+            <!--TODO 可以在这里自定义你的Session ID-->
+            <name>SSM-TEMPLATE_SESSION_ID</name>
+            <http-only>false</http-only>
         </cookie-config>
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-
 
     <!--增加编码过滤器，如下（注意，需要设置forceEncoding参数值为true）-->
     <filter>
@@ -57,19 +67,20 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+
     <!--替换默认的401错误页面-->
     <error-page>
         <error-code>401</error-code>
-        <location>/WEB-INF/jsp/error/401.jsp</location>
+        <location>//error/401</location>
     </error-page>
     <!--替换默认的403错误页面-->
     <error-page>
         <error-code>403</error-code>
-        <location>/WEB-INF/jsp/error/403.jsp</location>
+        <location>//error/403</location>
     </error-page>
     <!--替换默认的404错误页面-->
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/jsp/error/404.jsp</location>
+        <location>//error/404</location>
     </error-page>
 </web-app>

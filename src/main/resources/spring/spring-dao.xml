@@ -31,7 +31,6 @@
         <property name="idleConnectionTestPeriod" value="0"/>
         <!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
         <property name="maxIdleTime" value="1800"/>
-
     </bean>
 
     <!-- 3.配置SqlSessionFactory为Mybatis的SqlSessionFactoryBean -->
@@ -40,9 +39,9 @@
         <property name="dataSource" ref="dataSource"/>
         <!-- 配置mybatis全局配置文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <!-- 扫描Entity包 使用包名 -->
-        <property name="typeAliasesPackage" value="com.spawpaw.ssmtemplate.entity"/>
-        <!-- 扫描sql配置文件:mapper需要的配置文件 -->
+        <!-- 使用类别名代替类全名。 可以使用mybatis的插件来自动生成mapper，所以这项配置然并卵 -->
+        <!--<property name="typeAliasesPackage" value="com.spawpaw.ssm.entity"/>-->
+        <!-- 扫描sql配置文件:mapper需要的配置文件。如果mapper和java文件在一个目录，则可以省略此配置 -->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
 
@@ -51,7 +50,8 @@
         <!-- 注入sqlSession 防止提前注入sqlSessionFactory-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!-- 给出需要扫描的Dao接口包 -->
-        <property name="basePackage" value="com.spawpaw.ssmtemplate.dao"/>
+        <!--TODO 这里填你的dao包的包名-->
+        <property name="basePackage" value="com.spawpaw.ssm.dao"/>
     </bean>
 
 

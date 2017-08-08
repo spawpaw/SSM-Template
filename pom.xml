@@ -1,11 +1,15 @@
 ﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.spawpaw.ssmtemplate</groupId>
-    <artifactId>ssmtemplate</artifactId>
+    <!-- TODO 这里填包名-->
+    <groupId>com.spawpaw</groupId>
+    <!--TODO 这里填artifactId-->
+    <artifactId>ssm</artifactId>
     <packaging>war</packaging>
+    <!--TODO 这里填你项目的版本号-->
     <version>0.0.1-SNAPSHOT</version>
-    <name>SSM-Template-Project</name>
+    <!--TODO 这里填项目名-->
+    <name>SSM-Template</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,6 +22,18 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
+        </dependency>
+        <!-- javamail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.3.9.RELEASE</version>
         </dependency>
 
         <!-- 项目依赖 -->
@@ -159,7 +175,8 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>ssmtemplate</finalName>
+        <!--TODO 这里填最终war包的名字-->
+        <finalName>ROOT</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -185,8 +202,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
