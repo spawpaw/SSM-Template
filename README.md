@@ -43,4 +43,8 @@ Spring+SpringMVC+Mybatis 整合框架的基本模板
 推荐使用postman来测试这些接口
 
 
+# 自定义
+点击`view`>`tool windows`>`TODOS`(快捷键 `alt+6`),查看可以直接修改的配置，
+注意在如果你更改了包名，要将配置文件中的包名也做相应修改
+
 
