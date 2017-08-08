@@ -7,7 +7,7 @@
                         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 引入属性文件 -->
-    <context:property-placeholder location="classpath:mail.properties"  ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:mail.properties" ignore-unresolvable="true"/>
 
     <!-- 邮件发送器   -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -30,6 +30,7 @@
         <property name="from" value="${mail.username}"/>
     </bean>
 
+    <!--TODO 邮件相关的配置-->
     <bean id="mailUtil" class="com.spawpaw.ssm.util.MailUtil">
         <property name="mailSender" ref="mailSender"></property>
         <property name="simpleMailMessage" ref="simpleMailMessage"></property>
