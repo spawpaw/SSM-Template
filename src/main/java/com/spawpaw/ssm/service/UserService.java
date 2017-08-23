@@ -1,6 +1,7 @@
 package com.spawpaw.ssm.service;
 
 import com.spawpaw.ssm.entity.User;
+import com.spawpaw.ssm.util.RequiredAuth;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +28,7 @@ public interface UserService {
     /**
      * 获取当前用户的个人资料
      */
+    @RequiredAuth(auths = {"user"})
     @RequestMapping(path = "", method = RequestMethod.GET)
     User getMyProfile(HttpSession session);
 
@@ -35,19 +37,18 @@ public interface UserService {
      *
      * @return 返回修改过后的个人资料
      */
+    @RequiredAuth(auths = {"user"})
     @RequestMapping(path = {""}, method = RequestMethod.PUT)
     User updateMyPassword(@RequestBody String password, HttpSession session);
 
     /**
      * 用于登出的接口
-     * 清除当前会话
      */
     @RequestMapping(path = "/logout", method = RequestMethod.GET)
     void logout(HttpSession session);
 
     /**
      * 用于登录的接口
-     * 清除当前会话
      */
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     User login(@RequestBody User user, HttpSession session);

@@ -1,10 +1,13 @@
 package com.spawpaw.ssm.common.interceptor;
 
+import com.spawpaw.ssm.exception.PermissionDeniedException;
+import com.spawpaw.ssm.util.RequiredAuth;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * 预处理所有请求
@@ -12,10 +15,8 @@ import java.util.List;
  *
  * @author BenBenShang spawpaw@hotmail.com on 2017/6/26
  */
+@Configuration
 public class PreInterceptor extends HandlerInterceptorAdapter {
-
-    private List<String> allowUrls;
-
     /**
      * preHandle方法是进行处理器拦截用的，顾名思义，该方法将在Controller处理之前进行调用，SpringMVC中的Interceptor拦截器是链式的，可以同时存在
      * 多个Interceptor，然后SpringMVC会根据声明的前后顺序一个接一个的执行，而且所有的Interceptor中的preHandle方法都会在
@@ -24,29 +25,17 @@ public class PreInterceptor extends HandlerInterceptorAdapter {
      */
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
-//        String requestUrl = request.getRequestURI();
-//
-//        for (String url : allowUrls) {
-//            if (requestUrl.endsWith(url)) {
-//                return true;
-//            }
-//        }
-//
-//        User session = (User) WebUtils.getSessionAttribute(request,
-//                "user");
-//        if (session != null) {
-//            return true;
-//        } else {
-//            throw new SessionTimeoutException("session超时或丢失");
-//        }
+        try {
+            HandlerMethod hm = (HandlerMethod) handler;//如果没有对应的方法,那么这句会抛出类型转换异常
+            RequiredAuth requiredAuth = hm.getMethodAnnotation(RequiredAuth.class);
+
+            if (requiredAuth != null)
+                for (String auth : requiredAuth.auths())//检查该用户的session中是否有对应的Attribute
+                    if (request.getSession().getAttribute(auth) == null)
+                        throw new PermissionDeniedException("权限不足");
+        } catch (Exception e) {
+            //什么也不做
+        }
         return true;
-    }
-
-    public List<String> getAllowUrls() {
-        return allowUrls;
-    }
-
-    public void setAllowUrls(List<String> allowUrls) {
-        this.allowUrls = allowUrls;
     }
 }

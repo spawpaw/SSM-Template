@@ -11,41 +11,33 @@
 	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <!-- 配置SpringMVC -->
-    <!-- 1:开启SpringMVC的注解模式 -->
+    <!-- 开启SpringMVC的注解模式 -->
     <!-- 简化配置:
     	(1)自动注解DefaultAnnotationHandlerMapping ,AnnotationMethodHandlerAdapter
     	(2)提供一系列:数据绑定,数字和日期的format，@NumberFormat，@DataTimeFormat，
     	xml，json的支持 -->
     <mvc:annotation-driven/>
+    <!-- 扫描web相关的配置 -->
+    <!--TODO 要扫描的根包-->
     <context:component-scan base-package="com.spawpaw.ssm"/>
-    <!-- 2.静态资源默认servlet配置
+    <!-- 静态资源默认servlet配置
         (1)加入对静态资源的处理:gif,js,png
         (2)允许使用"/"做整体映射-->
     <mvc:default-servlet-handler/>
-    <!-- 3.配置jsp 显示ViewResolver -->
+    <!-- 配置jsp 显示ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    <!-- 4:扫描web相关的配置 -->
-    <!--TODO service层的位置-->
-    <context:component-scan base-package="com.spawpaw.ssm.service"/>
-
-    <!-- session timeout interceptor ,设置进入特定网页需要满足的session条件，在SessionTimeout拦截器中实现 -->
-    <!--<mvc:interceptors>-->
-    <!--<mvc:interceptor>-->
-    <!--<mvc:mapping path="/*"/>-->
-    <!--<bean class="PreInterceptor">-->
-    <!--<property name="allowUrls">-->
-    <!--<list>-->
-    <!--<value>/</value>-->
-    <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
-    <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <!--设置进入特定网页需要满足的session条件, 先在方法上添加@RequiredAuth()注解,然后该拦截器就会在执行该方法前检查session中是否存在注解中标识的key,如不存在就抛权限异常-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.spawpaw.ssm.common.interceptor.PreInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
     <!-- Controller增强
