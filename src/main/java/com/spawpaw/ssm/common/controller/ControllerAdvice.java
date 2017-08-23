@@ -32,22 +32,6 @@ public class ControllerAdvice implements ResponseBodyAdvice {
 
     private static Map<String, Integer> errorMap = new HashMap<>();
 
-    public void setShowErrorStackInMessage(boolean showErrorStackInMessage) {
-        ControllerAdvice.showErrorStackInMessage = showErrorStackInMessage;
-    }
-
-    public void setUnknownExceptionCode(Integer unknownExceptionCode) {
-        ControllerAdvice.unknownExceptionCode = unknownExceptionCode;
-    }
-
-    public void setPackagePrefix(String prefix) {
-        packagePrefix = "class " + prefix + ".";
-    }
-
-    public void setErrorMap(Map<String, Integer> eMap) {
-        errorMap = eMap;
-    }
-
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
         return true;
@@ -81,4 +65,22 @@ public class ControllerAdvice implements ResponseBodyAdvice {
         //返回异常信息
         return new CommonResponse(code == null ? unknownExceptionCode : code, message);
     }
+
+
+    public void setShowErrorStackInMessage(boolean showErrorStackInMessage) {
+        ControllerAdvice.showErrorStackInMessage = showErrorStackInMessage;
+    }
+
+    public void setUnknownExceptionCode(Integer unknownExceptionCode) {
+        ControllerAdvice.unknownExceptionCode = unknownExceptionCode;
+    }
+
+    public void setPackagePrefix(String prefix) {
+        packagePrefix = "class " + prefix + ".";
+    }
+
+    public void setErrorMap(Map<String, Integer> eMap) {
+        errorMap = eMap;
+    }
+
 }
