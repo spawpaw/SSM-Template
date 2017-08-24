@@ -7,13 +7,9 @@ package com.spawpaw.ssm.common.config;
  */
 public class Config {
     //max records per query
-    public static final int MAX_PAGE_SIZE = 1000;
+    public static final int max_page_size = 1000;
 
-
-    /**
-     * 在响应体中打印异常栈
-     */
-    public static final boolean SHOW_ERROR_STACK_TRACE_IN_RESPONSE = true;
+    public static boolean cache_need_to_be_refresh = true;
 
     /**
      * compress files ends with jsp/html/css/js
