@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <!-- 开启SpringMVC的注解模式:
+        自动注解DefaultAnnotationHandlerMapping ,AnnotationMethodHandlerAdapter
+    	提供一系列:数据绑定,数字和日期的format，@NumberFormat，@DataTimeFormat，xml，json的支持 -->
+    <mvc:annotation-driven/>
+    <!--TODO 要扫描的根包-->
+    <context:component-scan base-package="com.spawpaw.ssm"/>
+    <!-- 静态资源默认servlet配置,加入对静态资源的处理:gif,js,png,允许使用"/"做整体映射-->
+    <mvc:default-servlet-handler/>
+
+    <!--设置进入特定网页需要满足的权限, 在方法上添加@RequiredAuth()注解,拦截器会在执行该方法前检查session中的用户是否有权使用此接口,如无权则抛出权限不足异常-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.spawpaw.ssm.common.interceptor.AuthInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- 配置jsp 显示ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
