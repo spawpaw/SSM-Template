@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  */
 //只处理该包下的Controller
 // TODO: 将你的service所在的包名填在这里
-@RestControllerAdvice(basePackages = {"com.spawpaw.ssm.service"})
+@RestControllerAdvice(basePackages = {"com.spawpaw.ssm.controller"})
 @RestController
 @RequestMapping("error")
 public class ControllerAdvice implements ResponseBodyAdvice {

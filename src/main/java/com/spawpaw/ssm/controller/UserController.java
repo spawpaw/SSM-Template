@@ -1,4 +1,4 @@
-package com.spawpaw.ssm.service;
+package com.spawpaw.ssm.controller;
 
 import com.spawpaw.ssm.common.interceptor.RequiredAuth;
 import com.spawpaw.ssm.exception.PermissionDeniedException;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  */
 @RestController
 @RequestMapping(path = "/user")
-public class UserService {
+public class UserController {
 
     @RequestMapping(path = "login", method = RequestMethod.GET)
     @RequiredAuth(auths = {Auth.CAN_ACCESS_X_MODULE, Auth.LOGGED_IN})
