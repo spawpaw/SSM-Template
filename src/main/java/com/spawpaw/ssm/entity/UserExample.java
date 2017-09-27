@@ -388,7 +388,7 @@ public class UserExample {
     }
 
     /**
-     * @author CDFAE1CC 2017-09-27
+     * user
      */
     public static class Criteria extends GeneratedCriteria {
 
