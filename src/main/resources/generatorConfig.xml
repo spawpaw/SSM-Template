@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--数据库驱动 -->
+    <!--<classPathEntry-->
+    <!--location="C:\Users\john\Desktop\Manager\ams\target\zjit\WEB-INF\lib\mysql-connector-java-5.1.35.jar" />-->
+    <context
+            id="MySQL2Tables"
+            targetRuntime="MyBatis3"
+            defaultModelType="flat">
+
+        <commentGenerator type="com.spawpaw.ssm.common.mybatis.MyBatisCommentGenerator">
+            <property name="suppressDate" value="true"/><!--阻止生成注释包含时间戳-->
+            <property name="suppressAllComments" value="false"/><!--阻止生成注释-->
+        </commentGenerator>
+        <!--数据库链接地址账号密码 -->
+        <!--TODO 如更改驱动,请同时为pom.xml中的MBG插件添加相应依赖 -->
+        <!--TODO 填写数据库相关信息,之后运行maven: mybatis-generator:generate 生成代码-->
+        <jdbcConnection
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://appx.host:3306/ssm_template?useSSL=false&amp;nullNamePatternMatchesAll=true"
+                userId="ssm_template"
+                password="123456">
+
+            <!--connectionURL="jdbc:mysql://localhost:3306/ssm_template?useSSL=false"-->
+            <!--userId="ssm_template"-->
+            <!--password="ssm_template">-->
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--生成实体类存放位置 -->
+        <!--TODO 生成Mapper之前,记得修改包名-->
+        <javaModelGenerator targetPackage="com.spawpaw.ssm.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="useActualColumnNames" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件存放位置 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="useActualColumnNames" value="true"/>
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置 -->
+        <!--TODO 生成Mapper之前,记得修改包名-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.spawpaw.ssm.dao" targetProject="src/main/java">
+            <property name="useActualColumnNames" value="true"/>
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--生成对应表及类名 `%`匹配所有表 -->
+        <table tableName="%"
+               enableCountByExample="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true"
+               selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="true"/>
+            <!--生成主键,如果数据库中无此项,请单独配置-->
+            <generatedKey column="id" sqlStatement="Mysql"/>
+        </table>
+    </context>
+</generatorConfiguration>
