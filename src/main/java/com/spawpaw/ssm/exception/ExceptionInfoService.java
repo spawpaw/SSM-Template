@@ -14,13 +14,13 @@ public class ExceptionInfoService {
     private Map<String, CommonResponse> errorMap;
 
     ExceptionInfoService() {
-        registerEx(10001, "喵主子拒绝了你的腐摸并向你翻了个白眼(无权访问本接口)", PermissionDeniedException.class.toString());
+        registerEx(10001, "(无权访问本接口)", PermissionDeniedException.class.toString());
 
 
         //java 异常体系中的异常
-        registerEx(50001, "(不允许为空的变量传入了空值,可能是表单的某些必填项为空)", NullPointerException.class.toString());
-        registerEx(50002, "猫->狗 的转换发生了错误,喵星人永不为奴!(类型转换错误)", ClassCastException.class.toString());
-        registerEx(50003, "0/0,(算数错误,像0被用作分母这种)", ArithmeticException.class.toString());
+        registerEx(50001, "不允许为空的变量传入了空值,可能是表单的某些必填项为空", NullPointerException.class.toString());
+        registerEx(50002, "类型转换错误", ClassCastException.class.toString());
+        registerEx(50003, "算数错误,像0被用作分母这种", ArithmeticException.class.toString());
         registerEx(50004, "数组越界", ArrayIndexOutOfBoundsException.class.toString());
 
         /* spring异常体系中的异常
