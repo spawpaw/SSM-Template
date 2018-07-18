@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spawpaw.ssm.dao.ActorMapperx">
+  <resultMap id="BaseResultMap" type="com.spawpaw.ssm.entity.ActorEntity">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <id column="actor_id" jdbcType="SMALLINT" property="actor_id" />
+    <result column="first_name" jdbcType="VARCHAR" property="first_name" />
+    <result column="last_name" jdbcType="VARCHAR" property="last_name" />
+    <result column="last_update" jdbcType="TIMESTAMP" property="last_update" />
+    <result column="is_delete" jdbcType="BIT" property="is_delete" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    actor_id, first_name, last_name, last_update, is_delete
+  </sql>
+  <select id="selectByExample" parameterType="com.spawpaw.ssm.entity.ActorExamplex" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from `actor`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from `actor`
+    where actor_id = #{actor_id,jdbcType=SMALLINT}
+  </select>
+  <select id="selectByPrimaryKeyWithLogicalDelete" parameterType="map" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from `actor`
+    where actor_id = #{actor_id,jdbcType=SMALLINT}
+      and is_delete = 
+    <choose>
+      <when test="andLogicalDeleted">
+        '1'
+      </when>
+      <otherwise>
+        '0'
+      </otherwise>
+    </choose>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    delete from `actor`
+    where actor_id = #{actor_id,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.spawpaw.ssm.entity.ActorExamplex">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    delete from `actor`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.spawpaw.ssm.entity.ActorEntity">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <selectKey keyProperty="actor_id" order="AFTER" resultType="java.lang.Short">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `actor` (first_name, last_name, last_update, 
+      is_delete)
+    values (#{first_name,jdbcType=VARCHAR}, #{last_name,jdbcType=VARCHAR}, #{last_update,jdbcType=TIMESTAMP}, 
+      #{is_delete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spawpaw.ssm.entity.ActorEntity">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <selectKey keyProperty="actor_id" order="AFTER" resultType="java.lang.Short">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `actor`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="first_name != null">
+        first_name,
+      </if>
+      <if test="last_name != null">
+        last_name,
+      </if>
+      <if test="last_update != null">
+        last_update,
+      </if>
+      <if test="is_delete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="first_name != null">
+        #{first_name,jdbcType=VARCHAR},
+      </if>
+      <if test="last_name != null">
+        #{last_name,jdbcType=VARCHAR},
+      </if>
+      <if test="last_update != null">
+        #{last_update,jdbcType=TIMESTAMP},
+      </if>
+      <if test="is_delete != null">
+        #{is_delete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.spawpaw.ssm.entity.ActorExamplex" resultType="java.lang.Long">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select count(*) from `actor`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update `actor`
+    <set>
+      <if test="record.actor_id != null">
+        actor_id = #{record.actor_id,jdbcType=SMALLINT},
+      </if>
+      <if test="record.first_name != null">
+        first_name = #{record.first_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.last_name != null">
+        last_name = #{record.last_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.last_update != null">
+        last_update = #{record.last_update,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.is_delete != null">
+        is_delete = #{record.is_delete,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update `actor`
+    set actor_id = #{record.actor_id,jdbcType=SMALLINT},
+      first_name = #{record.first_name,jdbcType=VARCHAR},
+      last_name = #{record.last_name,jdbcType=VARCHAR},
+      last_update = #{record.last_update,jdbcType=TIMESTAMP},
+      is_delete = #{record.is_delete,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spawpaw.ssm.entity.ActorEntity">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update `actor`
+    <set>
+      <if test="first_name != null">
+        first_name = #{first_name,jdbcType=VARCHAR},
+      </if>
+      <if test="last_name != null">
+        last_name = #{last_name,jdbcType=VARCHAR},
+      </if>
+      <if test="last_update != null">
+        last_update = #{last_update,jdbcType=TIMESTAMP},
+      </if>
+      <if test="is_delete != null">
+        is_delete = #{is_delete,jdbcType=BIT},
+      </if>
+    </set>
+    where actor_id = #{actor_id,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spawpaw.ssm.entity.ActorEntity">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update `actor`
+    set first_name = #{first_name,jdbcType=VARCHAR},
+      last_name = #{last_name,jdbcType=VARCHAR},
+      last_update = #{last_update,jdbcType=TIMESTAMP},
+      is_delete = #{is_delete,jdbcType=BIT}
+    where actor_id = #{actor_id,jdbcType=SMALLINT}
+  </update>
+  <update id="logicalDeleteByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update `actor` set is_delete = 1
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="logicalDeleteByPrimaryKey" parameterType="java.lang.Short">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update `actor` set is_delete = 1
+    where actor_id = #{actor_id,jdbcType=SMALLINT}
+  </update>
+  <insert id="batchInsert" keyColumn="actor_id" keyProperty="actor_id" parameterType="map" useGeneratedKeys="true">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into `actor`
+    (first_name, last_name, last_update, is_delete)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.first_name,jdbcType=VARCHAR}, #{item.last_name,jdbcType=VARCHAR}, #{item.last_update,jdbcType=TIMESTAMP}, 
+        #{item.is_delete,jdbcType=BIT})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" keyColumn="actor_id" keyProperty="actor_id" parameterType="map" useGeneratedKeys="true">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Jul 18 19:38:47 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into `actor` (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.value}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'first_name' == column.value">
+          #{item.first_name,jdbcType=VARCHAR}
+        </if>
+        <if test="'last_name' == column.value">
+          #{item.last_name,jdbcType=VARCHAR}
+        </if>
+        <if test="'last_update' == column.value">
+          #{item.last_update,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'is_delete' == column.value">
+          #{item.is_delete,jdbcType=BIT}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
+</mapper>
