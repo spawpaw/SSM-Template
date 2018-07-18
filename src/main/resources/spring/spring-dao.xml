@@ -52,7 +52,7 @@
         <!-- 使用类别名代替类全名。 可以使用mybatis的插件来自动生成mapper，所以这项配置然并卵 -->
         <!--<property name="typeAliasesPackage" value="com.spawpaw.ssm.entity"/>-->
         <!-- 扫描sql配置文件:mapper需要的配置文件。如果mapper和java文件在一个目录，则可以省略此配置 -->
-        <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
 
     <!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
