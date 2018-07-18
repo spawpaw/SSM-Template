@@ -1,8 +1,6 @@
 package com.spawpaw.ssm.controller;
 
 import com.spawpaw.ssm.common.interceptor.RequiredAuth;
-import com.spawpaw.ssm.exception.PermissionDeniedException;
-import com.spawpaw.ssm.util.Auth;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +15,9 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     @RequestMapping(path = "login", method = RequestMethod.GET)
-    @RequiredAuth(auths = {Auth.CAN_ACCESS_X_MODULE, Auth.LOGGED_IN})
+    @RequiredAuth(auths = {"ROLE_ADMIN", "TEST_PERMISSION"})
     void login(HttpSession session) {
 
-        throw new PermissionDeniedException();
     }
 
 }
