@@ -9,7 +9,7 @@
     <url>http://maven.apache.org</url>
     <properties>
         <!--打包出来的war包的名字-->
-        <finalName>SSH-Template</finalName>
+        <finalName>SSM-Template</finalName>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
