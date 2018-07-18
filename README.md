@@ -34,11 +34,7 @@
 
 ## 3.统一的权限控制
 #### step1
-在`....util.Auth`中定义相关权限的枚举,并实现其逻辑.
+如果需要对某个接口进行权限验证，则直接在上面加上`@RequiredAuth`注解，AuthInterceptor会自动拦截所有请求并判断当前session的用户是否拥有指定的权限。
 
 #### step2
-在需要权限认证的接口上,添加@RequiredAuth(auths={})
-
-
-之后,定义在`....interceptor.AuthInterceptor`中的拦截器就会在调用该接口时验证该接口是否满足写在注解上的权限,
-
+在AuthInterceptor修改`hasPermission()`方法，从session中取得用户所具有的权限列表。
