@@ -1,6 +1,5 @@
 package com.spawpaw.ssm.common.interceptor;
 
-import com.spawpaw.ssm.util.Auth;
 
 import java.lang.annotation.*;
 
@@ -15,5 +14,5 @@ import java.lang.annotation.*;
 @Documented
 public @interface RequiredAuth {
     //各个权限之间的关系为'与'
-    Auth[] auths() default {};
+    String[] auths() default {};
 }

@@ -1,13 +1,13 @@
 package com.spawpaw.ssm.common.interceptor;
 
 import com.spawpaw.ssm.exception.PermissionDeniedException;
-import com.spawpaw.ssm.util.Auth;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 权限拦截器
@@ -30,14 +30,19 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             RequiredAuth requiredAuth = hm.getMethodAnnotation(RequiredAuth.class);
 
             if (requiredAuth != null)
-                for (Auth auth : requiredAuth.auths())
-                    if (!auth.checkPermission(request.getSession()))
+                for (String privilege : requiredAuth.auths())
+                    if (!hasPermission(privilege, request.getSession()))
                         throw new PermissionDeniedException("权限不足");
         } catch (ClassCastException e) {
             //2.有这个异常,说明这个接口不需要权限验证,所以我们什么也不做
             //e.printStackTrace();
-            System.out.println("调用了无需权限验证的接口/资源");
+//            System.out.println("调用了无需权限验证的接口/资源");
         }
+        return true;
+    }
+
+    private boolean hasPermission(String privilege, HttpSession session) {
+        // TODO: 2018/7/18  处理权限认证逻辑
         return true;
     }
 }
