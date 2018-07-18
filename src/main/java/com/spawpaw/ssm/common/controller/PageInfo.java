@@ -3,7 +3,7 @@ package com.spawpaw.ssm.common.controller;
 /**
  * @author BenBenShang spawpaw@hotmail.com 2017/9/5
  */
-public class PageHelper {
+public class PageInfo {
     public int currentPage;//当前页
     public int pageSize;//每页多少条数据
 
@@ -19,12 +19,12 @@ public class PageHelper {
         return pageSize;
     }
 
-    public PageHelper(int currentPage, int pageSize) {
+    public PageInfo(int currentPage, int pageSize) {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
     }
 
-    public PageHelper(int currentPage, int pageSize, int totalRows) {
+    public PageInfo(int currentPage, int pageSize, int totalRows) {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
         this.totalRows = totalRows;

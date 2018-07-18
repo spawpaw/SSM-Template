@@ -21,9 +21,9 @@ public class StdRestController<T, PK> {
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    CommonResponseWithPageHelper<List<T>> getList(HttpSession session,
-                                                  @RequestParam("currentPage") Integer currentPage,
-                                                  @RequestParam("pageSize") Integer pageSize ) {
+    CommonResponseWithPageInfo<List<T>> getList(HttpSession session,
+                                                @RequestParam("currentPage") Integer currentPage,
+                                                @RequestParam("pageSize") Integer pageSize ) {
         return null;
     }
 
